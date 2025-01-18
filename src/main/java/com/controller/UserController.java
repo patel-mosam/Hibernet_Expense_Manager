@@ -2,6 +2,7 @@ package com.controller;
 
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -69,7 +70,8 @@ public class UserController {
        // Find user by email
        UserEntity user = userRepository.findByEmail(email);
        
-       if (user != null && passwordEncoder.matches(password, user.getPassword())) {
+//       if (user != null && passwordEncoder.matches(password, user.getPassword())) {
+    	   if (user != null && passwordEncoder.matches(password, user.getPassword())) {
            model.addAttribute("msg", "Successful Login");
            return "redirect:/homepage";
 //           
@@ -117,6 +119,7 @@ public class UserController {
 	            userRepository.save(user); // Save OTP in the database
 //			mail send
 			mailerService.sendMailForOtp(email, otp);
+			model.addAttribute("email",email);
 			return "ChangePassword";
 			
 		}
@@ -186,6 +189,20 @@ public class UserController {
 		model.addAttribute("users",users);
 		return "ListUsers";
 	}
+	
+	
+	@GetMapping("deleteUser")
+	public String deleteUser(@RequestParam("userId") UUID userId) {
+	    userRepository.deleteById(userId); // Ensure UUID is used for the userId, not Integer
+	    return "redirect:/listuser";
+	}
+	
+	
+	public String getMethodName(@RequestParam String param) {
+		return new String();
+	}
+	
+	
 	
 //	@PostMapping("listuser")
 //	public String ListUSers() {
