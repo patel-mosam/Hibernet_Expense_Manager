@@ -1,6 +1,5 @@
 package com.repository;
 
-import java.util.List;
 import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -24,6 +23,8 @@ public interface UserRepository extends JpaRepository<UserEntity, UUID> {
     @Transactional
     @Query(value = "UPDATE users SET otp = :otp WHERE email = :email",nativeQuery = true)
     void updateOtpByEmail(@Param("email") String email,@Param("otp") String otp);
+
+
 
 
 }

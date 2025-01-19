@@ -115,9 +115,11 @@
                     <!-- Button for List Account -->
                     <a href="/listuser" class="btn btn-primary btn-lg">List Users Account</a>
                     <!-- Button for Add Account -->
-                    <a href="/addaccount" class="btn btn-success btn-lg">Add Account</a>
+                    <a href="/createaccount" class="btn btn-success btn-lg">Create Account</a>
+                      <!-- Button for Add Account -->
+                    <a href="/listaccount" class="btn btn-success btn-lg">List Account</a>
                     <!-- Button for Vendor -->
-                    <a href="/vendor" class="btn btn-info btn-lg">Vendor</a>
+                    <a href="/addvendor" class="btn btn-info btn-lg">Add Vendor</a>
                     <!-- Button for Category -->
                     <a href="/category" class="btn btn-warning btn-lg">Category</a>
                     <!-- Button for Subcategory -->
