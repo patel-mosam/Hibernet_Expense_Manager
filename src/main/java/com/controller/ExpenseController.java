@@ -66,8 +66,7 @@ public class ExpenseController{
 	}
 
 	@PostMapping("updatexpense")
-	public String UpdateExpenses(@ModelAttribute ExpenseEntity expenseEntity) {
-		//TODO: process POST request
+	public String UpdateExpenses(ExpenseEntity expenseEntity) {
 		expenseRepository.save(expenseEntity);
 		return "redirect:/listexpenses";
 	}

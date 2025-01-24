@@ -1,6 +1,7 @@
 package com.controller;
 
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,8 +12,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.entity.AccountEntity;
 import com.entity.UserEntity;
 import com.repository.AccountRepository;
+import com.repository.UserRepository;
+
+import jakarta.servlet.http.HttpSession;
+
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestBody;
 
 
 @Controller
@@ -20,6 +24,12 @@ public class AccountController {
 
 	@Autowired
 	AccountRepository accountRepository;
+	
+	@Autowired
+	UserRepository userRepository;
+	
+	@Autowired
+	private HttpSession session;
 
 	@GetMapping("createaccount")
 	public String getMethodName() {
@@ -28,8 +38,18 @@ public class AccountController {
 
 	@PostMapping("saveaccount")
 	public String SaveAccount(AccountEntity accountEntity) {
-		accountRepository.save(accountEntity);
-		return "redirect:/listaccount";
+		
+		UUID userId = (UUID)session.getAttribute("userId");
+		Optional<UserEntity> optUser = userRepository.findById(userId);
+		if(optUser.isPresent()) {
+			accountEntity.setUser(optUser.get());
+			accountRepository.save(accountEntity);
+			return "redirect:/listaccount";
+		}else {
+	        
+	        return "redirect:/addaccount?error=userNotFound";
+			
+		}
 	}
 
 	@GetMapping("listaccount")
@@ -45,7 +65,7 @@ public class AccountController {
 	}
 
 	@GetMapping("editaccount")
-	public String EditAccount(@RequestParam Integer id, Model model) {
+	public String EditAccount(@RequestParam("id") Integer id, Model model) {
 		Optional<AccountEntity> optional = accountRepository.findById(id);
 		if (optional.isEmpty()) {
 			return "redirect:/listaccount";
@@ -57,6 +77,9 @@ public class AccountController {
 
 	@PostMapping("updateaccount")
 	public String UpdateUser(AccountEntity accountEntity) {
+		UUID userId = (UUID)session.getAttribute("userId");
+		Optional<UserEntity> optUser = userRepository.findById(userId);
+		accountEntity.setUser(optUser.get());
 		accountRepository.save(accountEntity);
 		return "redirect:/listaccount";
 	}

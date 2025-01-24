@@ -27,17 +27,17 @@ public class IncomeController {
 	}
 	
 	@PostMapping("saveincome")
-	public String AddCategory(@ModelAttribute IncomeEntity incomeEntity) {
+	public String AddCategory( IncomeEntity incomeEntity) {
 		  System.out.println("Amount: " + incomeEntity.getAmount());
 		incomeRepository.save(incomeEntity);
-		return "Income";
+		return "ListIncome";
 	}
 	
 	@GetMapping("listincome")
 	public String ListIncome(Model model) {
 		List<IncomeEntity> income = incomeRepository.findAll();
 		model.addAttribute("income", income);
-		return "ListIncome";
+		return "redirect:/listincome";
 	}
 	
 	@GetMapping("deleteincome")

@@ -11,17 +11,17 @@
     <div class="container mt-5">
         <h1 class="text-center mb-4">Add Expense</h1>
         <form action="saveexpenses" method="post" class="row g-3">
-            <!-- Title -->
+            <!--              <!-- Status -->
+            <div class="col-md-6">
+                <label for="status" class="form-label">Status</label>
+                <select id="status" name="status" class="form-select" required>
+                    <option value="PENDING">PendTitle -->
             <div class="col-md-6">
                 <label for="title" class="form-label">Title</label>
                 <input type="text" class="form-control" id="title" name="title" required>
             </div>
 
-                         <!-- Status -->
-            <div class="col-md-6">
-                <label for="status" class="form-label">Status</label>
-                <select id="status" name="status" class="form-select" required>
-                    <option value="PENDING">Pending</option>
+            </option>
                     <option value="COMPLETED">Completed</option>
                     <option value="CANCELLED">Cancelled</option>
                 </select>

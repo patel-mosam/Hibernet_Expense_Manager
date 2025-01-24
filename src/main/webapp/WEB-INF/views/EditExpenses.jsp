@@ -52,10 +52,17 @@
                     <input type="text" class="form-control" id="amount" name="amount" value="${expenses.amount}" required placeholder="Enter Expense amount" />
                 </div>
                 
+                
                 <div class="mb-4">
                     <label for="title" class="form-label">Status:</label>
                     <input type="text" class="form-control" id="status" name="status" value="${expenses.status}" required placeholder="Enter Expense status" />
                 </div>
+                
+                <!-- Transaction Date -->
+            <div class="col-md-6">
+                <label for="transactionDate" class="form-label">Transaction Date</label>
+                <input type="datetime-local" class="form-control" id="transactionDate" value="${expenses.transactionDate}" name="transactionDate" required>
+            </div>
                 
                 <div class="mb-4">
                     <label for="title" class="form-label">Description:</label>

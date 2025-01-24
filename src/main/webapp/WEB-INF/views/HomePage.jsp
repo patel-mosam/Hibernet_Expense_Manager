@@ -133,9 +133,9 @@
                       <!-- Button for List Expenses -->
                     <a href="/listexpenses" class="btn btn-warning btn-lg">List Expenses</a>
                     <!-- Button for Income -->
-                    <a href="income" class="btn btn-warning btn-lg">Income</a>
+                    <a href="/income" class="btn btn-warning btn-lg">Income</a>
                      <!-- Button for List Income -->
-                    <a href="listincome" class="btn btn-warning btn-lg">List Income</a>
+                    <a href="/listincome" class="btn btn-warning btn-lg">List Income</a>
                    
                 </div>
             </div>

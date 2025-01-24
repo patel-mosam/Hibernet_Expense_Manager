@@ -18,6 +18,7 @@
                     <th>Title</th>
                     <th>Amount</th>
                     <th>Description</th>
+                     <th>UserId</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -27,6 +28,7 @@
                         <td>${a.title}</td>
                         <td>${a.amount}</td>
                         <td>${a.description}</td>
+                         <td>${a.user.userId}</td>
                         <td>
                             <a href="deleteaccount?id=${a.accountId}" class="btn btn-danger btn-sm">DELETE</a>
                             <a href="editaccount?id=${a.accountId}" class="btn btn-primary btn-sm">EDIT</a>

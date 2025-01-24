@@ -66,8 +66,8 @@
             
             <!-- Description -->
             <div class="mb-4">
-                <label for="description" class="form-label">Description:</label>
-                <textarea class="form-control" id="description" name="description" required placeholder="Enter Description" rows="3"></textarea>
+                <label for="description" class="form-label">Description:</label> 
+               <textarea class="form-control" id="description" name="description" required placeholder="Enter Description" rows="3"></textarea>
             </div>
             
             <!-- Submit Button -->

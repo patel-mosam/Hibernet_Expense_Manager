@@ -1,5 +1,7 @@
 package com.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -12,6 +14,8 @@ import com.entity.UserEntity;
 import com.repository.UserRepository;
 import com.service.MailerService;
 import com.service.OtpGeneratorService;
+
+import jakarta.servlet.http.HttpSession;
 
 
 @Controller
@@ -28,6 +32,9 @@ public class SessionController {
 	
 	@Autowired
 	MailerService mailerService;
+	
+	@Autowired
+	private HttpSession session;
 	
 	@GetMapping("signup")
 	public String ShowSignUpPage() {
@@ -57,24 +64,46 @@ public class SessionController {
 	
 	
 	 
-	@PostMapping("login")
-	public String LoginUsers(@RequestParam String email ,@RequestParam String password , Model model) {
-
-       // Find user by email
-       UserEntity user = userRepository.findByEmail(email);
-       
-//       if (user != null && passwordEncoder.matches(password, user.getPassword())) {
-    	   if (user != null && passwordEncoder.matches(password, user.getPassword())) {
-           model.addAttribute("msg", "Successful Login");
-           return "redirect:/homepage";
+//	@PostMapping("login")
+//	public String LoginUsers(@RequestParam String email ,@RequestParam String password , Model model) {
+//
+//       // Find user by email
+//       Optional<UserEntity> optUser = userRepository.findByEmail(email);
+//       
+////       if (user != null && passwordEncoder.matches(password, user.getPassword())) {
+//    	   if (optUser.isPresent() && passwordEncoder.matches(password, optUser.get().getPassword())) {
+//    		   session.setAttribute("userId",  optUser.get().getUserId());
+//    		   model.addAttribute("msg", "Successful Login");
+//           return "redirect:/homepage";
+////           
+//       }else {
 //           
-       }else {
-           
-           model.addAttribute("error", "Invalid Credentials");
-           return "Login";
+//           model.addAttribute("error", "Invalid Credentials");
+//           return "Login";
+//
+//       }
+//	}
+	
+	
+	@PostMapping("login")
+	public String LoginUsers(@RequestParam String email, @RequestParam String password, Model model) {
+	    // Find user by email
+	    Optional<UserEntity> optUser = userRepository.findByEmail(email);
 
-       }
+	    if (optUser.isPresent() && passwordEncoder.matches(password, optUser.get().getPassword())) {
+	        // Retrieve user details
+	        UserEntity user = optUser.get();
+
+	        // Set session attributes
+	        session.setAttribute("userId", user.getUserId());
+	        model.addAttribute("msg", "Successful Login");
+	        return "redirect:/homepage";
+	    } else {
+	        model.addAttribute("error", "Invalid Credentials");
+	        return "Login";
+	    }
 	}
+
 	
 
 	@GetMapping("homepage")
@@ -94,10 +123,10 @@ public class SessionController {
 		System.out.println("Email : "+email);
 		
 //		check db -> email present
-		UserEntity user = userRepository.findByEmail(email);
+		Optional<UserEntity> optUser = userRepository.findByEmail(email);
 //		true -> user present 
 //		false -> user not present 
-		if(user == null) {
+		if(optUser == null) {
 //			invalid email
 //			model.addAttribute("email",email);
 			model.addAttribute("error","Email is not Registered");
@@ -105,6 +134,7 @@ public class SessionController {
 		}else {
 			// OTP generate
 			String otp = otpGeneratorService.generateOtp(6);
+			 UserEntity user = optUser.get(); 
 //			user->db->otp sent
 			 user.setOtp(otp);
 			userRepository.updateOtpByEmail(email,otp);
@@ -157,8 +187,8 @@ public class SessionController {
 	    email = email.trim().toLowerCase();
 	    
 	    // Retrieve user from the repository
-	    UserEntity user = userRepository.findByEmail(email);
-
+	    Optional<UserEntity> optUser = userRepository.findByEmail(email);
+	    UserEntity user = optUser.get(); 
 	    // Check if user exists and OTP matches
 	    if (user != null && otp.equals(user.getOtp())) {
 	        user.setPassword(passwordEncoder.encode(newPassword));  // Update password

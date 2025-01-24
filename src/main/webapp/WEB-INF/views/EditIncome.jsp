@@ -42,8 +42,38 @@
                <input type="hidden" name="incomeId" value="${income.incomeId}" />
                 <div class="mb-4">
                     <label for="title" class="form-label">Income Title:</label>
-                    <input type="text" class="form-control" id="title" name="title" value="${income.title}" required placeholder="Enter Income title" />
+                    <input type="text" class="form-control" id="title" name="title" value="${income.title}" required />
                 </div>
+                
+                 <!-- Income Status -->
+            <div class="mb-4">
+                <label for="status" class="form-label">Income Status:</label>
+                <select class="form-control" id="status" name="status"   required>
+                    <option value="">Select Status</option>
+                    <option value="PENDING">PENDING</option>
+                    <option value="COMPLETED">COMPLETED</option>
+                    <option value="CANCELLED">CANCELLED</option>
+                </select>
+            </div>
+            
+            <!-- Amount -->
+            <div class="mb-4">
+                <label for="amount" class="form-label">Amount:</label>
+                <input type="number" class="form-control" id="amount" name="amount" value="${income.amount}"  required  step="0.01">
+            </div>
+            
+            <!-- Transaction Date -->
+            <div class="mb-4">
+                <label for="transactionDate" class="form-label">Transaction Date:</label>
+                <input type="date" class="form-control" id="transactionDate" value="${income.transactionDate}" name="transactionDate" required>
+            </div>
+            
+            <!-- Description -->
+            <div class="mb-4">
+                <label for="description" class="form-label">Description:</label>
+              <input type="text" class="form-control" id="description" name="description" value="${expenses.description}" required  />
+            </div>
+            
                 
                 <div class="mb-3">
                     <button type="submit" class="btn btn-primary btn-submit">Updated Income</button>

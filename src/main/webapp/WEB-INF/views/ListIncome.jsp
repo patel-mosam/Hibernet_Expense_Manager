@@ -65,7 +65,7 @@
                                 <td>${i.status}</td>
                                 <td>${i.amount}</td>
                                 <td>${i.transactionDate}</td>
-                                <td>${i.transactionDate}</td>
+                                <td>${i.description}</td>
                                 <td class="action-buttons">
                                     <a href="editincome?incomeId=${i.incomeId}" class="btn btn-warning btn-sm">Edit</a>
                                     <a href="deleteincome?incomeId=${i.incomeId}" class="btn btn-danger btn-sm"

@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.entity.AccountEntity;
 import com.entity.UserEntity;
 import com.repository.UserRepository;
 
@@ -22,6 +21,9 @@ public class UserController {
 
 	@Autowired
 	UserRepository userRepository;
+	
+	
+	
 	
 	@GetMapping("listuser")
 	public String ListUsersHere(Model model) {
@@ -37,7 +39,7 @@ public class UserController {
 	    return "redirect:/listuser";
 	}
 	
-	@GetMapping("editUser")
+	@GetMapping("edituser")
 	public String EditUsers(@RequestParam UUID userId , Model model) {
 		
 		

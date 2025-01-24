@@ -36,9 +36,9 @@ public class AccountEntity {
 
     // user -> account (1:M)
     
-//    @ManyToOne
-//    @JoinColumn(name = "userId",nullable = false)
-//    UserEntity user;
+    @ManyToOne
+    @JoinColumn(name = "userId",nullable = false)
+    UserEntity user;
 
     
 
