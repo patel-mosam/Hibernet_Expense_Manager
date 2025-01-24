@@ -114,16 +114,29 @@
                 <div class="btn-group">
                     <!-- Button for List Account -->
                     <a href="/listuser" class="btn btn-primary btn-lg">List Users Account</a>
-                    <!-- Button for Add Account -->
+                    <!-- Button for Create Account -->
                     <a href="/createaccount" class="btn btn-success btn-lg">Create Account</a>
                       <!-- Button for Add Account -->
                     <a href="/listaccount" class="btn btn-success btn-lg">List Account</a>
                     <!-- Button for Vendor -->
                     <a href="/addvendor" class="btn btn-info btn-lg">Add Vendor</a>
                     <!-- Button for Category -->
-                    <a href="/category" class="btn btn-warning btn-lg">Category</a>
-                    <!-- Button for Subcategory -->
+                    <a href="/category" class="btn btn-warning btn-lg">Add Category</a>
+                    <!-- Button for Category -->
+                    <a href="/listcategory" class="btn btn-warning btn-lg">List Category</a>
+                    <!-- Button for Sub Category -->
                     <a href="/subcategory" class="btn btn-warning btn-lg">Subcategory</a>
+                    <!-- Button for List Sub Category -->
+                    <a href="/listsubcategory" class="btn btn-warning btn-lg">List Sub Category</a>
+                     <!-- Button for Expenses -->
+                    <a href="/expenses" class="btn btn-warning btn-lg">Expenses</a>
+                      <!-- Button for List Expenses -->
+                    <a href="/listexpenses" class="btn btn-warning btn-lg">List Expenses</a>
+                    <!-- Button for Income -->
+                    <a href="income" class="btn btn-warning btn-lg">Income</a>
+                     <!-- Button for List Income -->
+                    <a href="listincome" class="btn btn-warning btn-lg">List Income</a>
+                   
                 </div>
             </div>
         </div>

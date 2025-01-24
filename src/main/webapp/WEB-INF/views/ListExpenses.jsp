@@ -1,5 +1,3 @@
-
-
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -8,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User List</title>
+    <title>Expense List</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -40,35 +38,39 @@
     <div class="container mt-5">
         <div class="card shadow-sm">
             <div class="card-header text-center">
-                <h3>User List</h3>
+                <h3>Expense List</h3>
             </div>
             <div class="card-body">
-
+           
                 <div class="mb-3">
-                    <a href="signup" class="btn btn-success">Add New User</a>
+                    <a href="homepage" class="btn btn-success">HomePage</a>
                 </div>
-
                 <table class="table table-bordered table-hover">
                     <thead class="table-primary">
                         <tr>
-                            <th>UserId</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Email</th>
-                            <th>Actions</th>
-                        </tr>
+
+	
+                            <th>ExpenseId</th>
+                            <th>Title</th>
+                            <th>Amount</th>
+                             <th>Status</th>
+                            <th>Transaction Date</th>
+                            <th>Description</th>
+						</tr>
                     </thead>
                     <tbody>
-                        <c:forEach items="${users}" var="u">
+                        <c:forEach items="${expenses}" var="e">
                             <tr>
-                                <td>${u.userId}</td>
-                                <td>${u.firstName}</td>
-                                <td>${u.lastName}</td>
-                                <td>${u.email}</td>
+                                <td>${e.expenseId}</td>
+                                <td>${e.title}</td>
+                                <td>${e.amount}</td>
+                                <td>${e.status}</td>
+                                <td>${e.transactionDate}</td>
+                                <td>${e.description}</td>
                                 <td class="action-buttons">
-                                    <a href="editUser?userId=${u.userId}" class="btn btn-warning btn-sm">Edit</a>
-                                    <a href="deleteUser?userId=${u.userId}" class="btn btn-danger btn-sm"
-                                       onclick="return confirm('Are you sure you want to delete this user?')">Delete</a>
+                                    <a href="editexpenses?expenseId=${e.expenseId}" class="btn btn-warning btn-sm">Edit</a>
+                                    <a href="deleteexpenses?expenseId=${e.expenseId}" class="btn btn-danger btn-sm"
+                                       onclick="return confirm('Are you sure you want to delete this Category?')">Delete</a>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -84,4 +86,3 @@
 
 </body>
 </html>
-

@@ -36,7 +36,7 @@
 		
 		<form method="post" action="updateaccount">
         
-        	
+        	 <input type="hidden" name="accountId" value="${account.accountId}" />
         <!-- Title -->
         <div class="mb-4">
             <label for="title" class="form-label">Title</label>
