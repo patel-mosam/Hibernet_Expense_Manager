@@ -2,6 +2,7 @@ package com.controller;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,7 +11,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.entity.CategoryEntity;
+import com.entity.UserEntity;
 import com.repository.CategoryRepository;
+import com.repository.UserRepository;
+
+import jakarta.servlet.http.HttpSession;
+
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
@@ -18,6 +24,12 @@ public class CategoryController {
 
 	@Autowired
 	CategoryRepository categoryRepository;
+	
+	@Autowired
+	UserRepository userRepository;
+	
+	@Autowired
+	private HttpSession session;
 
 	@GetMapping("category")
 	public String Category() {
@@ -25,9 +37,18 @@ public class CategoryController {
 	}
 
 	@PostMapping("savecategory")
-	public String AddCategory(CategoryEntity categoryEntity) {
-		categoryRepository.save(categoryEntity);
-		return "Category";
+	public String SaveCategory(CategoryEntity categoryEntity) {
+		
+		UUID userId = (UUID)session.getAttribute("userId");
+		Optional<UserEntity> optUser = userRepository.findById(userId);
+		if(optUser.isPresent()) {
+			categoryEntity.setUser(optUser.get());
+			categoryRepository.save(categoryEntity);
+			return "redirect:/listcategory";
+		}else {
+			return "redirect:/category?error=userNotFound";
+		}
+
 	}
 
 	@GetMapping("listcategory")
@@ -59,6 +80,9 @@ public class CategoryController {
 	}
 		@PostMapping("updatecategory")
 		public String updateUser(CategoryEntity categoryEntity) {
+			UUID userId = (UUID)session.getAttribute("userId");
+			Optional<UserEntity> optUser = userRepository.findById(userId);
+			categoryEntity.setUser(optUser.get());
 		    categoryRepository.save(categoryEntity);
 		    return "redirect:/listcategory";
 		}

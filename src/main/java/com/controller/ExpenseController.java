@@ -7,69 +7,58 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.entity.ExpenseEntity;
 import com.repository.ExpenseRepository;
-import org.springframework.web.bind.annotation.RequestBody;
-
 
 @Controller
-public class ExpenseController{
-
+public class ExpenseController {
+	
 	@Autowired
 	ExpenseRepository expenseRepository;
-	
-	@GetMapping("expenses")
-	public String Expense() {
-		return "Expenses";
+
+	@GetMapping("addexpense")
+	public String AddExpense() {
+		return"AddExpense";
 	}
 	
-	@PostMapping("saveexpenses")
-	public String AddCategory(ExpenseEntity expenseEntity) {
+	@PostMapping("saveexpense")
+	public String saveExpense(ExpenseEntity expenseEntity) {
 		expenseRepository.save(expenseEntity);
-		return "Expenses";
+		return "redirect:/listexpense";
 	}
 	
-	
-	
-	
-	@GetMapping("listexpenses")
-	public String ListExpenses(Model model) {
-		List<ExpenseEntity> expenses = expenseRepository.findAll();
-		model.addAttribute("expenses", expenses);
-		return "ListExpenses";
+	@GetMapping("listexpense")
+	public String listExpense(Model model) {
+		List<ExpenseEntity> expense = expenseRepository.findAll();
+		model.addAttribute("expense",expense);
+		return "ListExpense";
 	}
 	
-	
-	@GetMapping("deleteexpenses")
-	public String DeleteExpenses(@RequestParam("expenseId") Integer expenseId) {
+	@GetMapping("deleteexpense")
+	public String deleteExpense(@RequestParam("id") Long expenseId) {
 		expenseRepository.deleteById(expenseId);
-		return "redirect:/listexpenses";
+		return "redirect:/listexpense";
 	}
-
-	@GetMapping("editexpenses")
-	public String EditExpenses(@RequestParam("expenseId") Integer expenseId, Model model) {
-
-		Optional<ExpenseEntity> optional = expenseRepository.findById(expenseId);
-
-		if (optional.isEmpty()) {
-			return "redirect:/listexpenses";
-		} else {
-			ExpenseEntity expenses = optional.get();
-			model.addAttribute("expenses", expenses);
-			return "EditExpenses";
+	
+	@GetMapping("editexpense")
+	public String editExpense(@RequestParam Long id,Model model) {
+		Optional<ExpenseEntity> optional = expenseRepository.findById(id);
+		if(optional.isEmpty()) {
+			return "redirect:/listexpense";
 		}
+		ExpenseEntity expense = optional.get();
+		model.addAttribute("expense",expense);
+		return "EditExpense";
+	}
+	
+	@PostMapping("updateexpense")
+	public String updateExpense(ExpenseEntity expenseEntity){
+		expenseRepository.save(expenseEntity);
+		return "redirect:/listexpense";
 		
 	}
-
-	@PostMapping("updatexpense")
-	public String UpdateExpenses(ExpenseEntity expenseEntity) {
-		expenseRepository.save(expenseEntity);
-		return "redirect:/listexpenses";
-	}
 	
-
 }

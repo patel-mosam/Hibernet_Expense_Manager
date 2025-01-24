@@ -22,7 +22,7 @@
         border-radius: 10px;
         padding: 40px;
         box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
-        max-width: 900px;
+        max-width: 1200px; /* Increased container width */
         width: 100%;
     }
     h2 {
@@ -32,12 +32,11 @@
     .table {
         border-radius: 5px;
         box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+        font-size: 1.1rem; /* Larger font size for better visibility */
+        width: 100%; /* Make the table occupy full width */
     }
-    .table th {
-        text-align: center;
-        font-weight: bold;
-    }
-    .table td {
+    .table th, .table td {
+        padding: 15px; /* Increase padding for better spacing */
         text-align: center;
     }
     .table tr:hover {
@@ -53,10 +52,17 @@
     <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-md-12">
+            
                 <h2 class="text-center mb-4">Vendor List</h2>
+                <div class="mb-3">
+                    <a href="homepage" class="btn btn-success">HomePage</a>
+                    <a href="addvendor" class="btn btn-success">Add New Vendors</a>
+                </div>
                 <table class="table table-bordered table-striped">
                     <thead>
                         <tr>
+                        <th>User_Id</th>
+                        	<th>Vendor_Id</th>
                             <th>Title</th>
                             <th>Action</th>
                         </tr>
@@ -64,6 +70,8 @@
                     <tbody>
                         <c:forEach items="${vendors}" var="vendor">
                             <tr>
+                            <td>${vendor.user.userId}</td>
+                              	<td>${vendor.vendorId}</td>
                                 <td>${vendor.title}</td>
                                 <td>
                                     <!-- Hidden input to pass vendor ID -->

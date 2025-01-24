@@ -44,11 +44,13 @@
              <!-- Add New Category Button -->
                 <div class="mb-3">
                     <a href="subcategory" class="btn btn-success">Add New SubCategory</a>
+                     <a href="homepage" class="btn btn-success">HomePage</a>
                 </div>
                 <table class="table table-bordered table-hover">
                     <thead class="table-primary">
                         <tr>
-                            <th>SubCategoryId</th>
+                        
+                            <th>SubCategory_Id</th>
                             <th>Title</th>
                             <th>Actions</th>
                         </tr>
@@ -56,6 +58,7 @@
                     <tbody>
                         <c:forEach items="${subcategory}" var="sc">
                             <tr>
+                           
                                 <td>${sc.subcategoryId}</td>
                                 <td>${sc.title}</td>
                                 <td class="action-buttons">

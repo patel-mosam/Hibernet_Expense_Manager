@@ -33,7 +33,7 @@
 	<div class="form-container">
 		<h1 class="brand-logo">Expense-Manager</h1>
 		<h4 class="text-center mb-4">Edit users</h4>
-		<form action="updateuser" method="post">
+		<form action="updateUser" method="post">
 			<div class="mb-3">
 				<label for="firstName" class="form-label">First Name</label>
 				<input type="text" class="form-control" id="firstName" value="${user.firstName}" name="firstName" placeholder="Enter your first name" required>

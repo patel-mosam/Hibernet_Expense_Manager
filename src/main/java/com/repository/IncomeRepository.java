@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.entity.IncomeEntity;
 
-public interface IncomeRepository  extends JpaRepository<IncomeEntity, Integer>{
+public interface IncomeRepository extends JpaRepository<IncomeEntity, Long>{
 
 }

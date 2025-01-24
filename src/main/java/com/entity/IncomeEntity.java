@@ -1,9 +1,10 @@
 package com.entity;
 
 import java.math.BigDecimal;
-import java.sql.Date;
+import java.util.Date;
 
-import jakarta.persistence.Column;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -20,38 +21,33 @@ import lombok.Data;
 @Data
 public class IncomeEntity {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "incomeId")
-    private Integer incomeId;
+	public enum Status {
+        PENDING, COMPLETED, CANCELLED
+    }
+	
+	
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long incomeId;
 
-    @Column(name = "title", nullable = false)
     private String title;
 
-//    @Column(name = "accountId", nullable = false)
-//    private Integer accountId;
+    private Long accountId;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "status", nullable = false)
-    private IncomeStatus status;
+    private Status status;
 
-    public enum IncomeStatus {
-        PENDING,
-        COMPLETED,
-        CANCELLED
-    }
-
-    @Column(name = "amount", nullable = false, precision = 10, scale = 2)
     private BigDecimal amount;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
-    @Column(name = "transactionDate", nullable = false)
     private Date transactionDate;
 
-    @Column(name = "description", length = 500)
     private String description;
 
-//    @Column(name = "userId", nullable = false)
-//    private Integer userId;
-	
+    private Long userId;
+
+    
+   
+    
 }

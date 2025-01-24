@@ -1,5 +1,3 @@
-
-
 package com.controller;
 
 import java.util.List;
@@ -14,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.entity.UserEntity;
+import com.entity.VendorEntity;
 import com.repository.UserRepository;
 
 @Controller
@@ -22,16 +21,13 @@ public class UserController {
 	@Autowired
 	UserRepository userRepository;
 	
-	
-	
-	
 	@GetMapping("listuser")
 	public String ListUsersHere(Model model) {
 		List<UserEntity> users = userRepository.findAll();
 		model.addAttribute("users",users);
 		return "ListUsers";
 	}
-	
+
 	
 	@GetMapping("deleteUser")
 	public String DeleteUser(@RequestParam("userId") UUID userId) {
@@ -39,7 +35,7 @@ public class UserController {
 	    return "redirect:/listuser";
 	}
 	
-	@GetMapping("edituser")
+	@GetMapping("editUser")
 	public String EditUsers(@RequestParam UUID userId , Model model) {
 		
 		
@@ -56,7 +52,7 @@ public class UserController {
 	}
 	
 	
-	@PostMapping("updateuser")
+	@PostMapping("updateUser")
 	public String updateUser(UserEntity userEntity) {
 	    userRepository.save(userEntity);
 	    return "redirect:/listuser";

@@ -2,6 +2,7 @@ package com.controller;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,15 +12,24 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.entity.SubCategoryEntity;
+import com.entity.UserEntity;
 import com.repository.SubCategoryRepository;
+import com.repository.UserRepository;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class SubCategoryController {
 
 	@Autowired
-	
 	SubCategoryRepository subcategoryRepository;
 
+	@Autowired
+	UserRepository userRepository;
+	
+	@Autowired
+	private HttpSession session;
+	
 	@GetMapping("subcategory")
 	public String SubCategory() {
 		return "SubCategory";
@@ -27,8 +37,16 @@ public class SubCategoryController {
 
 	@PostMapping("savesubcategory")
 	public String AddSubCategory(SubCategoryEntity subcategoryEntity) {
+		
+//		UUID userId = (UUID)session.getAttribute("userId");
+//		Optional<UserEntity> optUser = userRepository.findById(userId);
+//		if(optUser.isPresent()) {
+//			subcategoryEntity.setUser(optUser.get());
 		subcategoryRepository.save(subcategoryEntity);
-		return "SubCategory";
+		return "redirect:/listsubcategory";
+//		}else {
+//			return "redirect:/subcategory?error=userNotFound";
+//		}
 	}
 
 	@GetMapping("listsubcategory")
@@ -63,6 +81,9 @@ public class SubCategoryController {
 	
 		@PostMapping("updatesubcategory")
 		public String updateSubCategory(SubCategoryEntity subcategoryEntity) {
+//			UUID userId = (UUID)session.getAttribute("userId");
+//			Optional<UserEntity> optUser = userRepository.findById(userId);
+//			subcategoryEntity.setUser(optUser.get());
 		    subcategoryRepository.save(subcategoryEntity);
 		    return "redirect:/listsubcategory";
 		}

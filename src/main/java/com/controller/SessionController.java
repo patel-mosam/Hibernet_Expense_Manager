@@ -61,29 +61,7 @@ public class SessionController {
 	public String LoginMethod() {
 		return "Login";
 	}
-	
-	
-	 
-//	@PostMapping("login")
-//	public String LoginUsers(@RequestParam String email ,@RequestParam String password , Model model) {
-//
-//       // Find user by email
-//       Optional<UserEntity> optUser = userRepository.findByEmail(email);
-//       
-////       if (user != null && passwordEncoder.matches(password, user.getPassword())) {
-//    	   if (optUser.isPresent() && passwordEncoder.matches(password, optUser.get().getPassword())) {
-//    		   session.setAttribute("userId",  optUser.get().getUserId());
-//    		   model.addAttribute("msg", "Successful Login");
-//           return "redirect:/homepage";
-////           
-//       }else {
-//           
-//           model.addAttribute("error", "Invalid Credentials");
-//           return "Login";
-//
-//       }
-//	}
-	
+
 	
 	@PostMapping("login")
 	public String LoginUsers(@RequestParam String email, @RequestParam String password, Model model) {

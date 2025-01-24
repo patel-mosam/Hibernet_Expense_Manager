@@ -1,10 +1,8 @@
 package com.entity;
 
-import java.util.Locale.Category;
-
-import org.apache.catalina.User;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -24,14 +22,14 @@ public class SubCategoryEntity {
 
 	    private String title;
 
-//	    @ManyToOne
-//	    @JoinColumn(name = "categoryId", nullable = false)
-//	    private Category category;  // Links to the Category entity
-//
-//	    @ManyToOne
-//	    @JoinColumn(name = "userId", nullable = false)
-//	    private User user;  // Links to the User entity
-	    
+//	    @ManyToOne(fetch = FetchType.LAZY)
+//	    @JoinColumn(name = "userId",nullable = false)
+//	    private UserEntity user;
+//	    
+//	    
+//	    @ManyToOne(fetch = FetchType.LAZY)
+//	    @JoinColumn(name = "categoryId",nullable = false)
+//	    private CategoryEntity category;
 
 	    
 }

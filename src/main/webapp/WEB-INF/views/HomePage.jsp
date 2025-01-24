@@ -120,6 +120,8 @@
                     <a href="/listaccount" class="btn btn-success btn-lg">List Account</a>
                     <!-- Button for Vendor -->
                     <a href="/addvendor" class="btn btn-info btn-lg">Add Vendor</a>
+                    <!-- Button for Vendor -->
+                    <a href="/listvendor" class="btn btn-info btn-lg">List Vendor</a>
                     <!-- Button for Category -->
                     <a href="/category" class="btn btn-warning btn-lg">Add Category</a>
                     <!-- Button for Category -->
@@ -129,13 +131,14 @@
                     <!-- Button for List Sub Category -->
                     <a href="/listsubcategory" class="btn btn-warning btn-lg">List Sub Category</a>
                      <!-- Button for Expenses -->
-                    <a href="/expenses" class="btn btn-warning btn-lg">Expenses</a>
+                    <a href="/addexpense" class="btn btn-warning btn-lg">Expenses</a>
                       <!-- Button for List Expenses -->
-                    <a href="/listexpenses" class="btn btn-warning btn-lg">List Expenses</a>
+                    <a href="/listexpense" class="btn btn-warning btn-lg">List Expenses</a>
                     <!-- Button for Income -->
-                    <a href="/income" class="btn btn-warning btn-lg">Income</a>
-                     <!-- Button for List Income -->
+                    <a href="/addincome" class="btn btn-warning btn-lg">Income</a>
+                    
                     <a href="/listincome" class="btn btn-warning btn-lg">List Income</a>
+                     
                    
                 </div>
             </div>

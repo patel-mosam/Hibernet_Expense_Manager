@@ -39,6 +39,9 @@
                 <h2>Add New Category</h2>
             </div>
             <form action="savecategory" method="post">
+            <div class="mb-3">
+				<a href="homepage" class="btn btn-success">HomePage</a>
+			</div>
                 <div class="mb-4">
                     <label for="title" class="form-label">Category Title:</label>
                     <input type="text" class="form-control" id="title" name="title" required placeholder="Enter category title" />

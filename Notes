@@ -1,0 +1,43 @@
+
+
+*******************  Relationship Mapping ***********************
+
+
+
+users and account 
+
+1 User ---> multiple Accounts (1:M)
+A single user can create or own multiple accounts.
+
+Multiple accounts ---> 1 User (M:1)
+Each account is associated with exactly one user.
+
+
+-------------------------------------------------------------
+
+users and vendors
+
+1 user ----> Multiple Vendors (1:M)
+A single user can create or own multiple vendors.
+
+multiple vendors ---> 1 User (M:1)
+Each vendor is associated with exactly one user.
+
+
+
+-------------------------------------------------------------
+
+users and categories
+
+1 user ---> Multiple Categories (1:M)
+Each user can have multiple categories
+
+multiple categories ---> 1 user (M:1)
+Each category belongs to exactly one user
+
+
+-------------------------------------------------------------
+
+
+
+
