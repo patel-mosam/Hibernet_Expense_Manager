@@ -77,7 +77,7 @@
                 <h2 class="text-center mb-4">Income List</h2>
                 
                 <div class="mb-3">
-				<a href="homepage" class="btn btn-success">HomePage</a>
+				<a href="userdashboard" class="btn btn-primary">User Dashboard</a>
 				<a href="addincome" class="btn btn-success">Add Income</a>
 			</div>
 			

@@ -1,6 +1,8 @@
 package com.entity;
 
 
+import java.util.UUID;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -19,17 +21,12 @@ public class SubCategoryEntity {
 	  @Id
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	    private Integer subcategoryId;
-
 	    private String title;
 
-//	    @ManyToOne(fetch = FetchType.LAZY)
-//	    @JoinColumn(name = "userId",nullable = false)
-//	    private UserEntity user;
-//	    
-//	    
-//	    @ManyToOne(fetch = FetchType.LAZY)
-//	    @JoinColumn(name = "categoryId",nullable = false)
-//	    private CategoryEntity category;
-
+	 // Many SubCategories belong to One Category
+	    @ManyToOne(fetch = FetchType.LAZY)
+	    @JoinColumn(name = "categoryId", nullable = false)
+	    private CategoryEntity category;
+	    
 	    
 }

@@ -50,9 +50,6 @@ public class UserEntity {
 	private List<VendorEntity> vendors;
 	
 	@OneToMany(mappedBy = "user",  cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<CategoryEntity> category;
-	
-//	@OneToMany(mappedBy = "user" , cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//	private List<SubCategoryEntity> subCategory;
-//	
+	private List<CategoryEntity> categories;
+		
 }

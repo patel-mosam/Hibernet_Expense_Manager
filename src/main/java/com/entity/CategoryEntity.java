@@ -1,5 +1,6 @@
 package com.entity;
 
+
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -20,25 +21,22 @@ import lombok.Data;
 @Data
 public class CategoryEntity {
 
-//	category			
-//	categoryID	PK	1	2
-//	title		Automobile	HouseHold
-//	userId	FK	12	12
-	
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "categoryId")
-	private Integer categoryId;
+	private Integer categoryId;	
 	
 	@Column(nullable = false)
     private String title;
 
+	  // Many Categories belong to One User
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "userId", nullable = false)
+    private UserEntity user;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "userId",nullable = false)
-	private UserEntity user;
-//	
-//	@OneToMany(mappedBy = "category",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//	private List<CategoryEntity> category;
+    // One Category can have multiple SubCategories
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<SubCategoryEntity> subCategories;
+	
+	
 }

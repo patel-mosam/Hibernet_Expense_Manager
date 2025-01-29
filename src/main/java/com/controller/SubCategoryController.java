@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.entity.CategoryEntity;
 import com.entity.SubCategoryEntity;
 import com.entity.UserEntity;
+import com.repository.CategoryRepository;
 import com.repository.SubCategoryRepository;
 import com.repository.UserRepository;
 
@@ -26,28 +28,32 @@ public class SubCategoryController {
 
 	@Autowired
 	UserRepository userRepository;
-	
+
+	@Autowired
+	CategoryRepository categoryRepository;
+
 	@Autowired
 	private HttpSession session;
-	
+
 	@GetMapping("subcategory")
 	public String SubCategory() {
 		return "SubCategory";
 	}
 
-	@PostMapping("savesubcategory")
-	public String AddSubCategory(SubCategoryEntity subcategoryEntity) {
 		
-//		UUID userId = (UUID)session.getAttribute("userId");
-//		Optional<UserEntity> optUser = userRepository.findById(userId);
-//		if(optUser.isPresent()) {
-//			subcategoryEntity.setUser(optUser.get());
-		subcategoryRepository.save(subcategoryEntity);
-		return "redirect:/listsubcategory";
-//		}else {
-//			return "redirect:/subcategory?error=userNotFound";
-//		}
+	@PostMapping("savesubcategory")
+	public String AddSubCategory(@RequestParam("categoryId") Integer categoryId, 
+	                             SubCategoryEntity subcategoryEntity) {
+	    Optional<CategoryEntity> categoryOpt = categoryRepository.findById(categoryId);
+	    if (categoryOpt.isPresent()) {
+	        subcategoryEntity.setCategory(categoryOpt.get());
+	        subcategoryRepository.save(subcategoryEntity);
+	        return "redirect:/listsubcategory";
+	    } else {
+	        return "redirect:/subcategory?error=categoryNotFound";
+	    }
 	}
+
 
 	@GetMapping("listsubcategory")
 	public String ListSubCategories(Model model) {
@@ -55,7 +61,6 @@ public class SubCategoryController {
 		model.addAttribute("subcategory", subcategory);
 		return "ListSubCategories";
 	}
-	
 
 	@GetMapping("deletesubcategory")
 	public String DeleteSubCategory(@RequestParam("subcategoryId") Integer subcategoryId) {
@@ -73,19 +78,39 @@ public class SubCategoryController {
 		} else {
 			SubCategoryEntity subcategory = optional.get();
 			model.addAttribute("subcategory", subcategory);
+			  // Set categoryId in session before redirecting to the edit form
+	        session.setAttribute("categoryId", subcategory.getCategory().getCategoryId());
+	        
 			return "EditSubCategory";
 		}
 		
 	}
+
+	@PostMapping("updatesubcategory")
+	public String updateSubCategory(SubCategoryEntity subcategoryEntity) {
+	    // **Get categoryId from session**
+	    Integer categoryId = (Integer) session.getAttribute("categoryId");  // **Change**
+
+	    if (categoryId == null) {
+	        // Handle the case when categoryId is missing from the session
+	        return "redirect:/listsubcategory?error=categoryIdNotFound";
+	    }
+
+	    Optional<CategoryEntity> categoryOpt = categoryRepository.findById(categoryId);
+
+	    if (categoryOpt.isPresent()) {
+	        subcategoryEntity.setCategory(categoryOpt.get());
+	        subcategoryRepository.save(subcategoryEntity);
+	    } else {
+	        // Handle the case when the category with the given categoryId is not found
+	        return "redirect:/listsubcategory?error=categoryNotFound";
+	    }
+
+	    return "redirect:/listsubcategory";
+	}
+
 	
 	
-		@PostMapping("updatesubcategory")
-		public String updateSubCategory(SubCategoryEntity subcategoryEntity) {
-//			UUID userId = (UUID)session.getAttribute("userId");
-//			Optional<UserEntity> optUser = userRepository.findById(userId);
-//			subcategoryEntity.setUser(optUser.get());
-		    subcategoryRepository.save(subcategoryEntity);
-		    return "redirect:/listsubcategory";
-		}
+
 
 }

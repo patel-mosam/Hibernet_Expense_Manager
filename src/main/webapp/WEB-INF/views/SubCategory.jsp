@@ -40,6 +40,7 @@
             </div>
             <form action="savesubcategory" method="post">
                 <div class="mb-4">
+                 <input type="hidden" name="categoryId" value="${categoryId}" /> 
                     <label for="title" class="form-label">SubCategory Title:</label>
                     <input type="text" class="form-control" id="title" name="title" required placeholder="Enter subcategory " />
                 </div>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<script src="C:\Users\mosam\Documents\workspace-spring-tool-suite-4-4.25.0.RELEASE\SHibernet_ExpenseManager\src\main\resources\static\assets\js\chart.js"></script>
+
+	<canvas id="myChart" width="300" height="100"></canvas>
+
+
+	<script>
+        // Get the context of the canvas element
+        var ctx = document.getElementById('myChart').getContext('2d');
+
+        // Create a new bar chart
+        var myChart = new Chart(ctx, {
+            type: 'pie', // Type of chart: bar chart
+            data: {
+                labels: ['January', 'February', 'March', 'April', 'May'], // X-axis labels
+                datasets: [{
+                    label: 'Sales', // Label for the dataset
+                    data: [65, 59, 80, 81, 56], // Data for the bars
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)', // Bar color (light blue)
+                    borderColor: 'rgba(54, 162, 235, 1)', // Border color for bars
+                    borderWidth: 1 // Border width
+                }]
+            },
+            options: {
+                responsive: true, // Make chart responsive
+                scales: {
+                    y: {
+                        beginAtZero: true // Y-axis starts from zero
+                    }
+                }
+            }
+        });
+    </script>
+
+</body> 
+</html>

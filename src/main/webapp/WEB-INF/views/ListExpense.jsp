@@ -76,7 +76,7 @@
             <div class="col-md-12">
                 <h2 class="text-center mb-4">Expense List</h2>
                    <div class="mb-3">
-				<a href="homepage" class="btn btn-success">HomePage</a>
+				<a href="userdashboard" class="btn btn-primary">User Dashboard</a>
 				<a href="addexpense" class="btn btn-success">Add Expense</a>
 		  </div>
                 <table class="table table-bordered table-striped">

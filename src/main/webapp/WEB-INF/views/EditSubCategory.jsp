@@ -39,8 +39,12 @@
                 <h2>Edit SubCategory</h2>
             </div>
             <form action="updatesubcategory" method="post">
-               <input type="hidden" name="subcategoryId" value="${subcategory.subcategoryId}" />
                 <div class="mb-4">
+                 <input type="hidden" name="categoryId" value="${categoryId}" />
+                 
+                 <input type="hidden" name="subcategoryId" value="${subcategory.subcategoryId}" />
+                 
+            
                     <label for="title" class="form-label">Sub Category Title:</label>
                     <input type="text" class="form-control" id="title" name="title" value="${subcategory.title}" required placeholder="Enter category title" />
                 </div>

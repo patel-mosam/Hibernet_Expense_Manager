@@ -36,21 +36,27 @@ public class CategoryController {
 		return "Category";
 	}
 
+	
 	@PostMapping("savecategory")
 	public String SaveCategory(CategoryEntity categoryEntity) {
-		
-		UUID userId = (UUID)session.getAttribute("userId");
-		Optional<UserEntity> optUser = userRepository.findById(userId);
-		if(optUser.isPresent()) {
-			categoryEntity.setUser(optUser.get());
-			categoryRepository.save(categoryEntity);
-			return "redirect:/listcategory";
-		}else {
-			return "redirect:/category?error=userNotFound";
-		}
+	    UUID userId = (UUID) session.getAttribute("userId"); // Retrieve user ID from session
+	    if (userId == null) {
+	        return "redirect:/category?error=noUserSession";
+	    }
 
+	    Optional<UserEntity> optUser = userRepository.findById(userId);
+	    if (optUser.isPresent()) {
+	        categoryEntity.setUser(optUser.get()); // Set the user before saving
+	        categoryRepository.save(categoryEntity);
+	        return "redirect:/listcategory";
+	    } else {
+	        return "redirect:/category?error=userNotFound";
+	    }
 	}
 
+	
+	
+	
 	@GetMapping("listcategory")
 	public String ListCategories(Model model) {
 		List<CategoryEntity> category = categoryRepository.findAll();

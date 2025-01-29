@@ -74,7 +74,7 @@ label {
 		<form method="post" action="savevendor">
 
 			<div class="mb-3">
-				<a href="homepage" class="btn btn-success">HomePage</a>
+				<a href="userdashboard" class="btn btn-primary">User Dashboard</a>
 			</div>
 
 			<!-- Title -->

@@ -40,4 +40,18 @@ Each category belongs to exactly one user
 
 
 
+users , categories & SubCategories
+
+
+1 user ---> Multiple Categories (1:M)
+Each user can have multiple categories
+
+1 category ---> Multiple SubCategories (1:M)
+Each category can have multiple categories
+
+
+1 user ---> multiple subcategory (1:M)
+Each user can have multiple subcategories
+
+
 
