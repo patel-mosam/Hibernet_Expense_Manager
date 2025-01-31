@@ -58,6 +58,8 @@
 				<table class="table table-bordered table-hover">
 					<thead class="table-primary">
 						<tr>
+							<th>SubCategory_Id</th>
+							<th>Category_Id</th>
 							<th>Title</th>
 							<th>Actions</th>
 						</tr>
@@ -65,14 +67,14 @@
 					<tbody>
 						 <c:forEach var="subcategory" items="${subcategories}">
 							<tr>
-								
+							<td>${subcategory.subcategoryId}</td>
+								<td>${subcategory.category.categoryId}</td>
 								<td>${subcategory.title}</td>
-								<td class="action-buttons"><a
-									href="editsubcategory?subcategoryId=${subcategory.subcategoryId}"
-									class="btn btn-warning btn-sm">Edit</a> <a
-									href="deletesubcategory?subcategoryId=${subcategory.subcategoryId}"
-									class="btn btn-danger btn-sm"
-									onclick="return confirm('Are you sure you want to delete this Category?')">Delete</a>
+								<td class="action-buttons">
+								<a href="editsubcategory/${subcategory.subcategoryId}" class="btn btn-warning btn-sm">Edit</a>
+
+							<a href="deletesubcategory/${subcategory.subcategoryId}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this subcategory?')">Delete</a>
+
 								</td>
 							</tr>
 						</c:forEach>

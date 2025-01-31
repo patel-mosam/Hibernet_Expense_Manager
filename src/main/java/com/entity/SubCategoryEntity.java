@@ -3,6 +3,7 @@ package com.entity;
 
 import java.util.UUID;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -18,8 +19,9 @@ import lombok.Data;
 @Data
 public class SubCategoryEntity {
 
-	  @Id
+	  	@Id
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	  	@Column(name = "subcategoryId")
 	    private Integer subcategoryId;
 	    private String title;
 

@@ -11,9 +11,5 @@ import com.entity.UserEntity;
 
 @Repository
 public interface CategoryRepository extends JpaRepository<CategoryEntity, Integer>{
-//	List<CategoryEntity> findByUserId(UUID userId);
-	
-	List<CategoryEntity> findByUser(UserEntity user);
-
 	
 }

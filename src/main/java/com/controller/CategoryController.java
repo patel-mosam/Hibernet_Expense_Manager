@@ -16,81 +16,90 @@ import com.repository.CategoryRepository;
 import com.repository.UserRepository;
 
 import jakarta.servlet.http.HttpSession;
-
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class CategoryController {
 
-	@Autowired
-	CategoryRepository categoryRepository;
-	
-	@Autowired
-	UserRepository userRepository;
-	
-	@Autowired
-	private HttpSession session;
+    @Autowired
+    CategoryRepository categoryRepository;
+    
+    @Autowired
+    UserRepository userRepository;
+    
+    @Autowired
+    private HttpSession session;
 
-	@GetMapping("category")
-	public String Category() {
-		return "Category";
-	}
+    // Show the add category form
+    @GetMapping("category")
+    public String AddCategory() {
+        return "Category";
+    }
 
-	
-	@PostMapping("savecategory")
-	public String SaveCategory(CategoryEntity categoryEntity) {
-	    UUID userId = (UUID) session.getAttribute("userId"); // Retrieve user ID from session
-	    if (userId == null) {
-	        return "redirect:/category?error=noUserSession";
-	    }
+    // Save the category with the logged-in user and store the category ID in the session
+    @PostMapping("savecategory")
+    public String SaveCategory(CategoryEntity categoryEntity) {
+        UUID userId = (UUID) session.getAttribute("userId"); 
+        
+        Optional<UserEntity> optUser = userRepository.findById(userId);
+        if (optUser.isPresent()) {
+            categoryEntity.setUser(optUser.get()); // Set the user before saving
+            categoryRepository.save(categoryEntity);
+            
+            Optional<CategoryEntity> optCategory = categoryRepository.findById(categoryEntity.getCategoryId());
+            session.setAttribute("categoryId", categoryEntity.getCategoryId());
 
-	    Optional<UserEntity> optUser = userRepository.findById(userId);
-	    if (optUser.isPresent()) {
-	        categoryEntity.setUser(optUser.get()); // Set the user before saving
-	        categoryRepository.save(categoryEntity);
-	        return "redirect:/listcategory";
-	    } else {
-	        return "redirect:/category?error=userNotFound";
-	    }
-	}
+            System.out.println("Category ID from session: " + categoryEntity.getCategoryId());
+            
+            return "redirect:/listcategory";
+        } else {
+            return "redirect:/category?error=userNotFound";
+        }
+    }
 
-	
-	
-	
-	@GetMapping("listcategory")
-	public String ListCategories(Model model) {
-		List<CategoryEntity> category = categoryRepository.findAll();
-		model.addAttribute("category", category);
-		return "ListCategories";
-	}
+    // List all categories
+    @GetMapping("listcategory")
+    public String ListCategories(Model model) {
+        List<CategoryEntity> category = categoryRepository.findAll();
+        model.addAttribute("category", category);
+        return "ListCategories";
+    }
 
-	@GetMapping("deletecategory")
-	public String DeleteCategory(@RequestParam("categoryId") Integer categoryId) {
-		categoryRepository.deleteById(categoryId);
-		return "redirect:/listcategory";
-	}
+    // Delete category by ID
+    @GetMapping("deletecategory")
+    public String DeleteCategory(@RequestParam Integer categoryId) {
+        categoryRepository.deleteById(categoryId);
+        return "redirect:/listcategory";
+    }
 
-	@GetMapping("editcategory")
-	public String EditCategory(@RequestParam("categoryId") Integer categoryId, Model model) {
+    // Show the edit category form
+    @GetMapping("editcategory")
+    public String EditCategory(@RequestParam Integer categoryId, Model model) {
 
-		Optional<CategoryEntity> optional = categoryRepository.findById(categoryId);
+        Optional<CategoryEntity> optional = categoryRepository.findById(categoryId);
 
-		if (optional.isEmpty()) {
-			return "redirect:/listcategory";
-		} else {
-			CategoryEntity category = optional.get();
-			model.addAttribute("category", category);
-			return "EditCategory";
-		}
-		
-	}
-		@PostMapping("updatecategory")
-		public String updateUser(CategoryEntity categoryEntity) {
-			UUID userId = (UUID)session.getAttribute("userId");
-			Optional<UserEntity> optUser = userRepository.findById(userId);
-			categoryEntity.setUser(optUser.get());
-		    categoryRepository.save(categoryEntity);
-		    return "redirect:/listcategory";
-		}
+        if (optional.isEmpty()) {
+            return "redirect:/listcategory";
+        } else {
+            CategoryEntity category = optional.get();
+            model.addAttribute("category", category);
+            return "EditCategory";
+        }
+    }
 
+    // Update the category after editing
+    @PostMapping("updatecategory")
+    public String updateCategory(CategoryEntity categoryEntity, Model model) {
+        UUID userId = (UUID) session.getAttribute("userId");
+
+        if (userId == null) {
+            model.addAttribute("error", "User not logged in.");
+            return "redirect:/login"; 
+        }
+
+        Optional<UserEntity> optUser = userRepository.findById(userId);
+        categoryEntity.setUser(optUser.get());
+        categoryRepository.save(categoryEntity);
+        return "redirect:/listcategory";
+    }
 }

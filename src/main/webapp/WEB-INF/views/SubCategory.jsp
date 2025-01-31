@@ -38,7 +38,7 @@
             <div class="header">
                 <h2>Sub Category</h2>
             </div>
-            <form action="savesubcategory" method="post">
+            <form action="/savesubcategory" method="post">
                 <div class="mb-4">
                  <input type="hidden" name="categoryId" value="${categoryId}" /> 
                     <label for="title" class="form-label">SubCategory Title:</label>
